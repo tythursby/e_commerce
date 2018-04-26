@@ -1,2 +1,9 @@
-<h1>Storefront#items_by_category</h1>
-<p>Find me in app/views/storefront/items_by_category.html.erb</p>
+<h3>In Soviet Russia Bee Baste 's You</h3>
+<p>All of our <% if @category.name == 'Other' %>
+<%= @category.name + ' Products'%>
+<%else%>
+<%= @category.name%>
+<% end %></p>
+
+
+<%= render 'products_partial'%>

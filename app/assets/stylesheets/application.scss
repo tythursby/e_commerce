@@ -13,5 +13,38 @@
 
  */
 
+ .ilb {
+   display: inline-block;
+ }
+
  @import 'bootstrap-sprockets';
  @import 'bootstrap';
+
+body {
+  margin-top: 70px;
+    font-family: 'IBM Plex Mono', monospace;
+}
+
+nav.navbar {
+
+  a.navbar-brand {
+    color: yellow;
+  }
+  a.navbar-brand:hover {
+    text-decoration: underline;
+    color: blue;
+  }
+  a.dropdown-toggle {
+    color: white;
+  }
+  ul.navbar-nav {
+    a {
+      color: white;
+    }
+  }
+  ul.dropdown-menu{
+    a {
+      color: black;
+    }
+  }
+}

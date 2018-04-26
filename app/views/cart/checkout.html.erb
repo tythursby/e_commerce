@@ -1,0 +1,44 @@
+<div class="well text-center">
+  <h3>Order Review-ski</h3>
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Quantity</th>
+      <th>Unit Price</th>
+      <th>Total Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @order.order_items.each do |key, value|%>
+      <tr>
+        <td><%=Product.find(key).name %></td>
+        <td><%= value %></td>
+        <td><%= number_to_currency Product.find(key).price %></td>
+        <td><%= number_to_currency Product.find(key).price * value %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<p>
+  <strong>Subtotal:</strong><%=number_to_currency @order.subtotal%>
+</p>
+<p>
+<strong>Tax:</strong><%=number_to_currency @order.sales_tax%>
+</p>
+<p>
+<strong>Order Total:</strong><%=number_to_currency @order.grand_total%>
+</p>
+
+<div class="ilb">
+  <%=form_tag order_complete_path do%>
+    <%= hidden_field_tag :order_id, @order.id%>
+    <script type="text/javascript" src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="<%=Rails.configuration.stripe[:publishable_key]%>"
+      data-description="Order #<%=@order.id%>"
+      data-amount="<%= (@order.grand_total.to_f.round(2) * 100)%>"></script>
+  <% end %>
+</div>
+  <%= link_to "Cancel Order", cancel_checkout_path(order_id: @order.id), method: :delete, class: "btn btn-danger", data: {confirm: "Are you sure?"}%>
